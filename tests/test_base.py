@@ -1,5 +1,5 @@
-from project_name.base import NAME
+from spotify_terminal_plugin.base import NAME
 
 
 def test_base():
-    assert NAME == "project_name"
+    assert NAME == "spotify_terminal_plugin"
