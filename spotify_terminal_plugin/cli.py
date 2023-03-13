@@ -9,6 +9,8 @@ Be creative! do whatever you want!
 """
 
 
+from spotify_plugin import SpotifyPlugin
+
 def main():  # pragma: no cover
     """
     The main function executes on commands:
@@ -25,4 +27,5 @@ def main():  # pragma: no cover
         * List all available tasks
         * Run an application (Flask, FastAPI, Django, etc.)
     """
-    print("This will do something")
+    sp = SpotifyPlugin()
+    sp.execute("")

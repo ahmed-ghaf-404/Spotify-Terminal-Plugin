@@ -1,18 +1,22 @@
+from dataclasses import dataclass
+
 import spotipy
 
 # from base import CLIENT_ID, CLIENT_SECRET, CLIENT_URI, CLIENT_SCOPE
 
-
+@dataclass
 class SpotifyController():
-    queue_index = 0
-
+    sp: spotipy.Spotify
+    
     def __init__(self, sp:spotipy.Spotify) -> None:
         self.sp = sp
         # spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=CLIENT_URI, scope=CLIENT_SCOPE))
         self.active_device_id = self.sp.devices()['devices'][0]['id']
         
 
-    def playSong(self, songName:str):
+    def playSong(self, *args):
+        songName = ' '.join(args)
+
         track_uri = self.searchTrack(songName)
 
         self.sp.transfer_playback(device_id=self.active_device_id, force_play=True)
@@ -20,6 +24,9 @@ class SpotifyController():
         # Play the track
         self.sp.start_playback(uris=[track_uri])
         return 
+    
+    def pause(self):
+        self.sp.pause_playback(self.active_device_id)
     
     
     def searchTrack(self, trackName:str) -> str:
