@@ -35,6 +35,7 @@ class SpotifyPlugin:
         parts = command.split(' ')
         try:
             self.setActiveCommand(parts.pop(0), parts)
+            self.execute()
         except KeyError:
             return f"Invalid command: {command}\nValid commands: {self.commands.keys}"
         except Exception as E:
@@ -49,6 +50,6 @@ class SpotifyPlugin:
 
 if __name__=="__main__":
     a = SpotifyPlugin()
-    print(a.parseCommand("play instant crush"))
+    print(a.parseCommand("play a lonely night"))
     print(a.execute())
     # a.parseCommand("pause")
